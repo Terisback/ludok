@@ -19,6 +19,7 @@ var drawingCanvas *ludok.Canvas
 var mouseX, mouseY int
 var pressed bool
 
+// Loading all the things
 func Load() {
 	tooltip = NewTooltip(6, ludok.White, color.RGBA{R: 0, G: 0, B: 0, A: 80})
 	x, y := ludok.Graphics.GetSize()
@@ -66,7 +67,7 @@ func Draw() {
 	tooltip.Draw(5, 5)
 
 	// Draw help tooltip
-	drawingTooltip.Draw(x/2, y/2)
+	drawingTooltip.Draw(x/2-drawingTooltip.Width/2, y-y/10-drawingTooltip.Height/2)
 }
 
 func Keyboard(event ludok.KeyboardEvent) {
@@ -94,12 +95,14 @@ func MouseButton(event ludok.MouseButtonEvent) {
 }
 
 func main() {
+	// That's shitty idea, I don't like that (but it's looking like Love2D and I like it)
 	ludok.Load = Load
 	ludok.Update = Update
 	ludok.Draw = Draw
 	ludok.Keyboard = Keyboard
 	ludok.MouseMoved = MouseMoved
 	ludok.MouseButton = MouseButton
+
 	ludok.Run(ludok.Config{
 		WindowWidth:  1280,
 		WindowHeight: 720,
